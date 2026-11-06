@@ -1,0 +1,12 @@
+ADEPA Food Hut — self-hosted webfonts
+=====================================
+
+Bricolage Grotesque (display) and Manrope (body) are distributed under the
+SIL Open Font License, Version 1.1: https://openfontlicense.org
+
+Files:
+  bricolage-grotesque-latin-var.woff2 — Bricolage Grotesque, Latin variable
+  manrope-latin-var.woff2            — Manrope, Latin variable
+
+Both files are served locally from this theme; no runtime request is made to
+Google Fonts or any other font CDN.

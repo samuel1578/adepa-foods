@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder dish image: abstract geometric composition with a large spice circle">
+  <title>ADEPA Food Hut — dish placeholder 01</title>
+  <rect width="800" height="1000" fill="#EFE7D8"/>
+  <circle cx="400" cy="392" r="250" fill="#C68A43"/>
+  <path d="M120 660h560v220H120z" fill="#A63C27"/>
+  <path d="M300 180h200v200H300z" fill="none" stroke="#202019" stroke-width="8"/>
+  <path d="M400 74v74M400 512v148M74 392h76M650 392h76" stroke="#202019" stroke-width="8"/>
+  <g fill="#F5F0E6">
+    <circle cx="400" cy="392" r="16"/>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="120" y="898" font-size="24" letter-spacing="6" fill="#F5F0E6">DISH 01</text>
+    <text x="120" y="950" font-size="17" letter-spacing="3" fill="#202019" fill-opacity="0.62">IMAGE PLACEHOLDER</text>
+    <text x="680" y="950" font-size="17" letter-spacing="3" text-anchor="end" fill="#202019" fill-opacity="0.62">ADEPA</text>
+  </g>
+</svg>

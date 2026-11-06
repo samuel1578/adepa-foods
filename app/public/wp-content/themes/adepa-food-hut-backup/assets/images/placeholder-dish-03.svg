@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder dish image: abstract pepper and cream diamond pattern">
+  <title>ADEPA Food Hut — dish placeholder 03</title>
+  <rect width="800" height="1000" fill="#E4D9C4"/>
+  <path d="M400 120l260 300-260 300-260-300z" fill="#A63C27"/>
+  <path d="M400 236l164 184-164 184-164-184z" fill="#F5F0E6"/>
+  <path d="M400 320l86 100-86 100-86-100z" fill="#202019"/>
+  <g fill="none" stroke="#68704B" stroke-width="14">
+    <path d="M120 840h560M120 890h560"/>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="120" y="940" font-size="24" letter-spacing="6" fill="#202019">DISH 03</text>
+    <text x="120" y="976" font-size="17" letter-spacing="3" fill="#202019" fill-opacity="0.62">IMAGE PLACEHOLDER</text>
+  </g>
+</svg>

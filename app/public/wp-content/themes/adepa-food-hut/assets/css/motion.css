@@ -1,0 +1,533 @@
+/**
+ * ADEPA Food Hut — Motion System Stylesheet.
+ *
+ * Adds animations, transitions, carousel styling, hero crossfade,
+ * sticky editorial layouts, and reduced motion overrides while
+ * strictly preserving existing design tokens and aesthetics.
+ *
+ * @package ADEPA_Food_Hut
+ */
+
+/* =========================================================================
+   1. Hero Image Rotation & Stacking
+   ========================================================================= */
+
+.adepa-hero__title .adepa-motion-line {
+    display: inline-block;
+}
+
+.adepa-motion-ready .adepa-hero__copy > .adepa-eyebrow,
+.adepa-motion-ready .adepa-hero__title .adepa-motion-line,
+.adepa-motion-ready .adepa-hero__lead,
+.adepa-motion-ready .adepa-hero__copy > .adepa-actions .wp-block-button,
+.adepa-motion-ready .adepa-hero__note {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: adepa-hero-copy-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.adepa-motion-ready .adepa-hero__title .adepa-motion-line:nth-child(1) {
+    animation-delay: 120ms;
+}
+
+.adepa-motion-ready .adepa-hero__title .adepa-motion-line:nth-child(2) {
+    animation-delay: 240ms;
+}
+
+.adepa-motion-ready .adepa-hero__lead {
+    transform: translateX(24px);
+    animation-name: adepa-hero-lead-in;
+    animation-delay: 360ms;
+}
+
+.adepa-motion-ready .adepa-hero__copy > .adepa-actions .wp-block-button:nth-child(1) {
+    animation-delay: 500ms;
+}
+
+.adepa-motion-ready .adepa-hero__copy > .adepa-actions .wp-block-button:nth-child(2) {
+    animation-delay: 620ms;
+}
+
+.adepa-motion-ready .adepa-hero__note {
+    animation-delay: 760ms;
+}
+
+.adepa-motion-ready .adepa-hero__stage {
+    opacity: 0;
+    transform: scale(1.035);
+    animation: adepa-hero-image-in 800ms cubic-bezier(0.2, 0.8, 0.2, 1) 180ms forwards;
+}
+
+.adepa-motion-ready .adepa-hero__media::before {
+    opacity: 0;
+    transform: translate(10px, 8px);
+    animation: adepa-hero-frame-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 120ms forwards;
+}
+
+.adepa-motion-ready .adepa-stamp {
+    opacity: 0;
+    transform: rotate(-8deg) scale(0.96);
+    animation: adepa-hero-stamp-in 650ms cubic-bezier(0.2, 0.8, 0.2, 1) 720ms forwards;
+}
+
+@keyframes adepa-hero-copy-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes adepa-hero-lead-in {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes adepa-hero-image-in {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes adepa-hero-frame-in {
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes adepa-hero-stamp-in {
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+.adepa-hero__media {
+    position: relative;
+}
+
+/* Stacking stage for hero images */
+.adepa-hero__stage {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    aspect-ratio: 1200 / 1166;
+    overflow: hidden;
+    background: var(--adepa-surface);
+}
+
+.adepa-hero__stage .adepa-hero__image,
+.adepa-hero__media .adepa-hero__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+/* Primary/First image fallback when not yet rotated or before JS */
+.adepa-hero__media .adepa-hero__image:first-of-type,
+.adepa-hero__stage .adepa-hero__image:first-of-type {
+    position: relative;
+    opacity: 1;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+/* When in absolute stack */
+.adepa-hero__stage .adepa-hero__image {
+    position: absolute;
+    inset: 0;
+}
+
+/* Active slide state */
+.adepa-hero__image.adepa-hero__image--active,
+.adepa-hero__image.is-active {
+    opacity: 1 !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+}
+
+.adepa-hero__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================================================
+   2. Featured Dishes Carousel
+   ========================================================================= */
+
+.adepa-featured .adepa-dishes {
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1.25rem;
+    /* Hide scrollbar subtly */
+    scrollbar-width: thin;
+    scrollbar-color: var(--adepa-line) transparent;
+}
+
+.adepa-featured .adepa-dishes::-webkit-scrollbar {
+    height: 6px;
+}
+
+.adepa-featured .adepa-dishes::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.adepa-featured .adepa-dishes::-webkit-scrollbar-thumb {
+    background-color: var(--adepa-line);
+    border-radius: 3px;
+}
+
+.adepa-featured .adepa-dish {
+    flex: 0 0 clamp(280px, 32vw, 380px);
+    scroll-snap-align: start;
+    transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.adepa-featured .adepa-dish:nth-child(odd) {
+    margin-top: 0;
+}
+
+.adepa-featured .adepa-dish:nth-child(even) {
+    margin-top: clamp(2.5rem, 8vw, 7rem);
+}
+
+.adepa-featured .adepa-dish--low,
+.adepa-featured .adepa-dish--high {
+    margin-top: clamp(2.5rem, 8vw, 7rem);
+}
+
+.adepa-featured .adepa-dish--high {
+    margin-top: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+.adepa-featured .adepa-dish:hover {
+    transform: translateY(-4px);
+}
+
+@media (max-width: 63.99em) {
+    .adepa-featured .adepa-dishes {
+        gap: 1.25rem;
+        padding-right: var(--page-gutter);
+    }
+
+    .adepa-featured .adepa-dish,
+    .adepa-featured .adepa-dish:nth-child(even),
+    .adepa-featured .adepa-dish--low,
+    .adepa-featured .adepa-dish--high {
+        margin-top: 0;
+    }
+}
+
+/* =========================================================================
+   3. Sticky Editorial Storytelling
+   ========================================================================= */
+
+@media (min-width: 64em) {
+    .adepa-menu__head {
+        position: sticky;
+        top: clamp(2rem, 5vw, 4.5rem);
+        align-self: start;
+        z-index: 2;
+    }
+
+    .adepa-story__head {
+        position: sticky;
+        top: clamp(2rem, 5vw, 4.5rem);
+        align-self: start;
+        z-index: 2;
+    }
+}
+
+/* =========================================================================
+   4. Staggered Brand Story Entrance Animations
+   ========================================================================= */
+
+.adepa-story .adepa-fact {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.adepa-reveal.is-visible .adepa-fact:nth-child(1),
+.adepa-facts.is-visible .adepa-fact:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 80ms;
+}
+
+.adepa-reveal.is-visible .adepa-fact:nth-child(2),
+.adepa-facts.is-visible .adepa-fact:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 200ms;
+}
+
+.adepa-reveal.is-visible .adepa-fact:nth-child(3),
+.adepa-facts.is-visible .adepa-fact:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 320ms;
+}
+
+/* =========================================================================
+   5. Delivery Geographical Maps
+   ========================================================================= */
+
+.adepa-delivery__head .adepa-eyebrow,
+.adepa-delivery__head .adepa-motion-line,
+.adepa-delivery__lead,
+.adepa-cta__head .adepa-eyebrow,
+.adepa-cta__head .adepa-motion-line,
+.adepa-cta__note,
+.adepa-cta .adepa-actions .wp-block-button {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.adepa-delivery__head .adepa-motion-line,
+.adepa-cta__head .adepa-motion-line {
+    display: inline-block;
+}
+
+.adepa-delivery__head.is-visible .adepa-eyebrow,
+.adepa-delivery__head.is-visible .adepa-motion-line,
+.adepa-delivery__head.is-visible .adepa-delivery__lead,
+.adepa-cta__grid.is-visible .adepa-cta__head .adepa-eyebrow,
+.adepa-cta__grid.is-visible .adepa-cta__head .adepa-motion-line,
+.adepa-cta__grid.is-visible .adepa-cta__note,
+.adepa-cta__grid.is-visible .adepa-actions .wp-block-button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.adepa-delivery__head.is-visible .adepa-motion-line:nth-of-type(2),
+.adepa-cta__grid.is-visible .adepa-cta__head .adepa-motion-line:nth-of-type(2) {
+    transition-delay: 140ms;
+}
+
+.adepa-delivery__head.is-visible .adepa-delivery__lead,
+.adepa-cta__grid.is-visible .adepa-cta__note {
+    transform: translateX(0);
+    transition-delay: 220ms;
+}
+
+.adepa-delivery__head .adepa-delivery__lead,
+.adepa-cta__side .adepa-cta__note {
+    transform: translateX(24px);
+}
+
+.adepa-areas .adepa-area {
+    position: relative;
+    opacity: 0;
+    transform: translateY(18px);
+    border-bottom-color: transparent;
+    transition: opacity 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.adepa-areas .adepa-area::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    background: var(--adepa-ink);
+    content: "";
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.adepa-areas.is-visible .adepa-area {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.adepa-areas.is-visible .adepa-area::after {
+    transform: scaleX(1);
+}
+
+.adepa-areas.is-visible .adepa-area:nth-child(2) {
+    transition-delay: 160ms;
+}
+
+.adepa-cta__side {
+    display: flex;
+    flex-direction: column;
+}
+
+.adepa-cta__grid.is-visible .adepa-actions .wp-block-button:nth-child(2) {
+    transition-delay: 140ms;
+}
+
+.adepa-steps .adepa-step {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.adepa-steps.is-visible .adepa-step {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.adepa-steps.is-visible .adepa-step:nth-child(2) {
+    transition-delay: 140ms;
+}
+
+.adepa-steps.is-visible .adepa-step:nth-child(3) {
+    transition-delay: 280ms;
+}
+
+.adepa-step h3,
+.adepa-step p {
+    transition: color 250ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .adepa-steps.is-visible .adepa-step:hover {
+        transform: translateY(-2px) scale(1.03);
+        border-color: var(--adepa-pepper);
+        box-shadow: 0 0.75rem 1.5rem rgba(32, 32, 25, 0.08);
+    }
+
+    .adepa-step:hover h3,
+    .adepa-step:hover p {
+        color: var(--adepa-pepper);
+    }
+}
+
+.adepa-area__map {
+    margin: 0;
+    width: 100%;
+    border: 1px solid var(--adepa-line);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--adepa-surface);
+    aspect-ratio: 400 / 240;
+    transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+}
+
+.adepa-area:hover .adepa-area__map {
+    border-color: var(--adepa-spice);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(32, 32, 25, 0.08);
+}
+
+.adepa-area__map img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================================================
+   6. Accessibility & Reduced Motion Overrides
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .adepa-hero__image,
+    .adepa-hero__stage .adepa-hero__image,
+    .adepa-featured .adepa-dish,
+    .adepa-story .adepa-fact,
+    .adepa-area__map,
+    .adepa-delivery__head .adepa-eyebrow,
+    .adepa-delivery__head .adepa-motion-line,
+    .adepa-delivery__lead,
+    .adepa-cta__head .adepa-eyebrow,
+    .adepa-cta__head .adepa-motion-line,
+    .adepa-cta__note,
+    .adepa-cta .adepa-actions .wp-block-button,
+    .adepa-areas .adepa-area,
+    .adepa-areas .adepa-area::after,
+    .adepa-steps .adepa-step {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    .adepa-motion-ready .adepa-hero__copy > .adepa-eyebrow,
+    .adepa-motion-ready .adepa-hero__title .adepa-motion-line,
+    .adepa-motion-ready .adepa-hero__lead,
+    .adepa-motion-ready .adepa-hero__copy > .adepa-actions .wp-block-button,
+    .adepa-motion-ready .adepa-hero__note {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    .adepa-motion-ready .adepa-hero__stage,
+    .adepa-motion-ready .adepa-hero__media::before,
+    .adepa-motion-ready .adepa-stamp {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    .adepa-story .adepa-fact {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .adepa-hero__image:not(:first-of-type) {
+        display: none !important;
+    }
+
+    .adepa-hero__image:first-of-type {
+        opacity: 1 !important;
+        position: relative !important;
+    }
+}
+
+/* Keep every hero image individually visible while editing in Gutenberg. */
+.editor-styles-wrapper .adepa-hero__stage {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    overflow: visible;
+    gap: 1rem;
+}
+
+.editor-styles-wrapper .adepa-hero__stage .adepa-hero__image,
+.editor-styles-wrapper .adepa-hero__media .adepa-hero__image {
+    position: relative !important;
+    inset: auto !important;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    opacity: 1 !important;
+    z-index: auto !important;
+    pointer-events: auto !important;
+    transition: none !important;
+}
+
+.editor-styles-wrapper .adepa-hero__stage .adepa-hero__image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}

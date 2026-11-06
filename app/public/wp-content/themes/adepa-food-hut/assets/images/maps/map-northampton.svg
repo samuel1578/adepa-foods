@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%" aria-labelledby="title-nn desc-nn" role="img">
+  <title id="title-nn">Northampton Delivery Coverage Map</title>
+  <desc id="desc-nn">Stylized geographical delivery area map for Northampton showing River Nene corridor, arterial routes and delivery perimeter.</desc>
+  <defs>
+    <linearGradient id="nn-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EEE8DC" />
+      <stop offset="100%" stop-color="#E2DACB" />
+    </linearGradient>
+    <pattern id="nn-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="0.8" fill="#DED8CC" />
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="240" fill="url(#nn-grad)" rx="4" />
+  <rect width="400" height="240" fill="url(#nn-dots)" opacity="0.8" rx="4" />
+
+  <!-- Delivery Zone Boundary Polygon -->
+  <path d="M 85,35 L 250,25 L 345,65 L 355,160 L 290,215 L 140,210 L 55,145 Z" 
+        fill="#C68A43" fill-opacity="0.12" stroke="#C68A43" stroke-width="1.75" stroke-dasharray="4,3" />
+
+  <!-- River Nene Ribbon Corridor -->
+  <path d="M 45,175 Q 110,185 160,150 T 260,145 T 365,115" 
+        fill="none" stroke="#68704B" stroke-width="3.5" stroke-linecap="round" opacity="0.6" />
+  <path d="M 120,205 Q 165,180 200,165" 
+        fill="none" stroke="#68704B" stroke-width="1.75" stroke-linecap="round" opacity="0.4" />
+
+  <!-- Major Arterial Corridors (A45, A508, A428, A5123) -->
+  <g stroke="#202019" stroke-opacity="0.32" stroke-width="1.75" stroke-linecap="round">
+    <!-- Radial Roads radiating from Town Centre -->
+    <path d="M 200,105 L 85,45" />
+    <path d="M 200,105 L 140,20" />
+    <path d="M 200,105 L 260,25" />
+    <path d="M 200,105 L 340,55" />
+    <path d="M 200,105 L 355,140" />
+    <path d="M 200,105 L 285,210" />
+    <path d="M 200,105 L 185,215" />
+    <path d="M 200,105 L 65,140" />
+    
+    <!-- Outer Ring Conductor -->
+    <path d="M 105,75 Q 200,45 310,75" stroke-dasharray="2,3" />
+    <path d="M 100,145 Q 195,190 310,155" stroke-dasharray="2,3" />
+  </g>
+
+  <!-- Central Northampton Hub Marker (Market Square / Town Centre) -->
+  <g transform="translate(200, 105)">
+    <circle cx="0" cy="0" r="18" fill="#A63C27" fill-opacity="0.2" />
+    <circle cx="0" cy="0" r="10" fill="#A63C27" fill-opacity="0.4" />
+    <circle cx="0" cy="0" r="5" fill="#A63C27" />
+    <circle cx="0" cy="0" r="2" fill="#FFFFFF" />
+  </g>
+
+  <!-- Key District Markers -->
+  <g fill="#202019" opacity="0.5">
+    <circle cx="140" cy="65" r="2.5" />
+    <circle cx="270" cy="60" r="2.5" />
+    <circle cx="280" cy="160" r="2.5" />
+    <circle cx="120" cy="140" r="2.5" />
+  </g>
+
+  <!-- Badge Label -->
+  <g transform="translate(18, 20)">
+    <rect width="118" height="24" rx="3" fill="#202019" />
+    <text x="59" y="16" fill="#F5F0E6" font-family="'Manrope', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle">NN ZONE · COVERED</text>
+  </g>
+</svg>

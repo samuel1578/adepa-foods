@@ -1,0 +1,15 @@
+/*
+Theme Name: ADEPA Food Hut
+Description: Editorial block theme for ADEPA Food Hut. Implements the ADEPA design system for the public website: tokens, typography, header, footer and reusable homepage sections.
+Version: 1.0.2
+Requires at least: 6.6
+Tested up to: 6.8
+Requires PHP: 7.4
+Author: ADEPA Food Hut project
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: adepa-food-hut
+Tags: block-theme, food, editorial, one-column, wide-blocks
+*/
+
+/* All presentation styles live in assets/css/main.css and are enqueued in functions.php. */

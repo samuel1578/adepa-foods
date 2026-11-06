@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%" aria-labelledby="title-mk desc-mk" role="img">
+  <title id="title-mk">Milton Keynes Delivery Coverage Map</title>
+  <desc id="desc-mk">Stylized geographical delivery area map for Milton Keynes showing grid roads, central hub and coverage boundary.</desc>
+  <defs>
+    <linearGradient id="mk-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EEE8DC" />
+      <stop offset="100%" stop-color="#E2DACB" />
+    </linearGradient>
+    <pattern id="mk-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#DED8CC" stroke-width="0.75" />
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="240" fill="url(#mk-grad)" rx="4" />
+  <rect width="400" height="240" fill="url(#mk-grid)" opacity="0.6" rx="4" />
+
+  <!-- Delivery Zone Boundary Polygon -->
+  <path d="M 60,40 L 220,25 L 340,55 L 360,170 L 260,215 L 120,200 L 45,130 Z" 
+        fill="#C68A43" fill-opacity="0.12" stroke="#C68A43" stroke-width="1.75" stroke-dasharray="4,3" />
+
+  <!-- Key Milton Keynes Grid Arteries (H & V Roads) -->
+  <g stroke="#202019" stroke-opacity="0.35" stroke-width="1.5" stroke-linecap="round">
+    <!-- Horizontal (H) Roads -->
+    <path d="M 50,60 Q 180,68 350,62" />
+    <path d="M 40,105 Q 190,112 360,108" />
+    <path d="M 45,150 Q 200,158 350,152" />
+    <path d="M 80,195 Q 210,198 310,192" />
+    
+    <!-- Vertical (V) Roads -->
+    <path d="M 90,35 Q 85,120 95,210" />
+    <path d="M 150,30 Q 148,125 155,215" />
+    <path d="M 215,25 Q 212,120 220,220" />
+    <path d="M 280,35 Q 282,125 285,210" />
+    <path d="M 335,50 Q 338,125 330,185" />
+  </g>
+
+  <!-- Canal/Water Feature (Grand Union Canal) -->
+  <path d="M 40,30 Q 110,90 140,140 T 170,225" fill="none" stroke="#68704B" stroke-width="2.5" stroke-linecap="round" opacity="0.5" />
+
+  <!-- Roundabouts / Major Junctions -->
+  <g fill="#202019" opacity="0.6">
+    <circle cx="150" cy="107" r="3" />
+    <circle cx="215" cy="109" r="3" />
+    <circle cx="280" cy="111" r="3" />
+    <circle cx="152" cy="153" r="3" />
+    <circle cx="216" cy="155" r="3" />
+    <circle cx="282" cy="154" r="3" />
+  </g>
+
+  <!-- Central Milton Keynes Delivery Hub Marker -->
+  <g transform="translate(215, 110)">
+    <circle cx="0" cy="0" r="18" fill="#A63C27" fill-opacity="0.2" />
+    <circle cx="0" cy="0" r="10" fill="#A63C27" fill-opacity="0.4" />
+    <circle cx="0" cy="0" r="5" fill="#A63C27" />
+    <circle cx="0" cy="0" r="2" fill="#FFFFFF" />
+  </g>
+
+  <!-- Badge Label -->
+  <g transform="translate(18, 20)">
+    <rect width="118" height="24" rx="3" fill="#202019" />
+    <text x="59" y="16" fill="#F5F0E6" font-family="'Manrope', Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.08em" text-anchor="middle">MK ZONE · COVERED</text>
+  </g>
+</svg>

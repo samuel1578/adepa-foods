@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="900" height="1200" role="img" aria-label="Placeholder kitchen image: abstract editorial composition in pepper, spice and cream">
+  <title>ADEPA Food Hut — kitchen placeholder</title>
+  <rect width="900" height="1200" fill="#A63C27"/>
+  <g fill="#F5F0E6">
+    <rect x="110" y="110" width="680" height="150"/>
+    <rect x="110" y="330" width="300" height="300"/>
+  </g>
+  <rect x="450" y="330" width="340" height="300" fill="#C68A43"/>
+  <circle cx="450" cy="830" r="230" fill="#202019"/>
+  <path d="M450 700v260M320 830h260" stroke="#F5F0E6" stroke-width="18"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#F5F0E6">
+    <text x="110" y="1120" font-size="24" letter-spacing="6">STORY PLACEHOLDER</text>
+    <text x="110" y="1158" font-size="17" letter-spacing="3" fill-opacity="0.72">REPLACE WITH ADEPA KITCHEN PHOTOGRAPHY</text>
+  </g>
+</svg>

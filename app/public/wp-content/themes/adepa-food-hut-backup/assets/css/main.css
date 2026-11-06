@@ -1,0 +1,1842 @@
+/*
+ * ADEPA Food Hut — public stylesheet.
+ *
+ * Built on the tokens in theme.json. Palette, type scale and spacing are
+ * locked to the approved design system; this file maps the presets to
+ * canonical custom properties and composes the editorial layout.
+ *
+ * @package ADEPA_Food_Hut
+ */
+
+/* -------------------------------------------------------------------------
+   1. Tokens
+   ------------------------------------------------------------------------- */
+
+:root {
+	/* Brand — DESIGN.md §22 */
+	--adepa-cream: #F5F0E6;
+	--adepa-ink: #202019;
+	--adepa-pepper: #A63C27;
+	--adepa-spice: #C68A43;
+	--adepa-olive: #68704B;
+	--adepa-white: #FFFFFF;
+
+	/* Semantic — DESIGN.md §22 */
+	--color-bg: var(--adepa-cream);
+	--color-surface: #EEE8DC;
+	--color-surface-strong: #FFFFFF;
+	--color-text: var(--adepa-ink);
+	--color-text-muted: #66655D;
+	--color-border: #DED8CC;
+	--color-primary: var(--adepa-pepper);
+	--color-primary-hover: #87301F;
+	--color-highlight: var(--adepa-spice);
+	--color-support: var(--adepa-olive);
+
+	/* Typography — DESIGN.md §22 */
+	--font-display: "Bricolage Grotesque", Arial, sans-serif;
+	--font-body: "Manrope", Arial, sans-serif;
+	--text-display-xl: clamp(3rem, 7.2vw, 6.5rem);
+	--text-display-lg: clamp(2.65rem, 5.5vw, 5rem);
+	--text-h1: clamp(2.375rem, 4.6vw, 4rem);
+	--text-h2: clamp(1.875rem, 3.6vw, 3rem);
+	--text-h3: clamp(1.4375rem, 2.4vw, 2rem);
+	--text-body: 1rem;
+	--text-small: 0.875rem;
+
+	/* Layout — DESIGN.md §22 */
+	--container-wide: 90rem;
+	--container-main: 77.5rem;
+	--container-reading: 47.5rem;
+	--page-gutter: clamp(1.25rem, 5vw, 5rem);
+
+	/* Spacing — DESIGN.md §22 */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.25rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+	--space-20: 5rem;
+	--space-24: 6rem;
+	--space-32: 8rem;
+
+	/* Shape — DESIGN.md §22 */
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 14px;
+	--radius-pill: 999px;
+
+	/* Motion — DESIGN.md §17/§22 */
+	--motion-fast: 140ms;
+	--motion-standard: 220ms;
+	--motion-panel: 280ms;
+	--motion-reveal: 420ms;
+	--ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+
+	/* Elevation — DESIGN.md §22 */
+	--shadow-overlay: 0 16px 48px rgba(32, 32, 25, 0.14);
+
+	/*
+	 * Local aliases used by components. Every value resolves to the canonical
+	 * token above; the aliases only keep component declarations readable.
+	 */
+	--adepa-pepper-dark: var(--color-primary-hover);
+	--adepa-muted: var(--color-text-muted);
+	--adepa-line: var(--color-border);
+	--adepa-surface: var(--color-surface);
+	--adepa-font-display: var(--font-display);
+	--adepa-font-body: var(--font-body);
+	--adepa-display-xl: var(--text-display-xl);
+	--adepa-display-lg: var(--text-display-lg);
+	--adepa-h1: var(--text-h1);
+	--adepa-h2: var(--text-h2);
+	--adepa-h3: var(--text-h3);
+	--adepa-h4: clamp(1.25rem, 1.6vw, 1.5rem);
+	--adepa-lead: clamp(1.125rem, 1.4vw, 1.375rem);
+	--adepa-body: var(--text-body);
+	--adepa-small: var(--text-small);
+	--adepa-micro: 0.75rem;
+	--adepa-gutter: var(--page-gutter);
+	--adepa-max: var(--container-wide);
+	--adepa-section: clamp(4rem, 9vw, 8rem);
+	--adepa-radius: var(--radius-sm);
+	--adepa-ease: var(--ease-standard);
+	--adepa-ease-emphasis: var(--ease-emphasis);
+}
+
+/* -------------------------------------------------------------------------
+   2. Base
+   ------------------------------------------------------------------------- */
+
+.adepa-site {
+	/* Components set their own margins; remove the global flow gap. */
+	--wp--style--block-gap: 0px;
+	background-color: var(--adepa-cream);
+	color: var(--adepa-ink);
+	font-family: var(--adepa-font-body);
+	font-size: var(--adepa-body);
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+}
+
+.adepa-site .adepa-main {
+	overflow-x: clip;
+}
+
+.adepa-site h1,
+.adepa-site h2,
+.adepa-site h3,
+.adepa-site h4 {
+	font-family: var(--adepa-font-display);
+	font-weight: 700;
+	line-height: 1.02;
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+}
+
+.adepa-site .wp-block-heading.adepa-display-xl {
+	font-size: var(--adepa-display-xl);
+	line-height: 0.93;
+	letter-spacing: -0.05em;
+}
+
+.adepa-site .wp-block-heading.adepa-display-lg {
+	font-size: var(--adepa-display-lg);
+	line-height: 0.97;
+	letter-spacing: -0.04em;
+}
+
+.adepa-site p {
+	text-wrap: pretty;
+}
+
+.adepa-site :focus-visible {
+	outline: 2px solid var(--adepa-pepper);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+.adepa-featured :focus-visible,
+.adepa-cta :focus-visible,
+.adepa-footer :focus-visible {
+	outline-color: var(--adepa-spice);
+}
+
+/* -------------------------------------------------------------------------
+   3. Shared typographic parts
+   ------------------------------------------------------------------------- */
+
+.adepa-eyebrow {
+	margin: 0 0 1.25rem;
+	font-family: var(--adepa-font-body);
+	font-size: var(--adepa-micro);
+	font-weight: 700;
+	line-height: 1.4;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--adepa-pepper);
+}
+
+.adepa-featured .adepa-eyebrow,
+.adepa-cta .adepa-eyebrow,
+.adepa-footer .adepa-eyebrow {
+	color: var(--adepa-spice);
+}
+
+.adepa-story .adepa-eyebrow {
+	display: flex;
+	align-items: center;
+	gap: 0.65rem;
+	color: var(--adepa-cream);
+}
+
+.adepa-story .adepa-eyebrow::before {
+	content: "";
+	width: 9px;
+	height: 9px;
+	flex: 0 0 auto;
+	background: var(--adepa-spice);
+	transform: rotate(45deg);
+}
+
+.adepa-lead {
+	max-width: 46ch;
+	font-size: var(--adepa-lead);
+	line-height: 1.55;
+}
+
+.adepa-note {
+	margin: 0;
+	font-size: var(--adepa-micro);
+	line-height: 1.6;
+	color: var(--adepa-muted);
+}
+
+.adepa-textlink {
+	margin: 0;
+	font-size: var(--adepa-small);
+	font-weight: 700;
+	line-height: 1.5;
+}
+
+.adepa-textlink a {
+	display: inline-flex;
+	padding-block: 0.15rem;
+	align-items: baseline;
+	gap: 0.4rem;
+	color: inherit;
+	text-decoration: none;
+	border-bottom: 1px solid currentColor;
+	padding-bottom: 2px;
+}
+
+.adepa-textlink a::after {
+	content: "↗";
+	font-size: 0.95em;
+	transition: transform var(--motion-standard) var(--adepa-ease);
+}
+
+.adepa-textlink a:hover {
+	color: var(--adepa-pepper);
+}
+
+.adepa-textlink a:hover::after {
+	transform: translate(2px, -2px);
+}
+
+.adepa-featured .adepa-textlink a:hover,
+.adepa-cta .adepa-textlink a:hover,
+.adepa-footer .adepa-textlink a:hover {
+	color: var(--adepa-spice);
+}
+
+.adepa-caption {
+	margin: 1.25rem 0 0;
+	max-width: 36ch;
+	font-size: var(--adepa-micro);
+	line-height: 1.5;
+	letter-spacing: 0.01em;
+	color: var(--adepa-muted);
+}
+
+.adepa-featured .adepa-caption {
+	color: rgba(245, 240, 230, 0.72);
+}
+
+/* Buttons ---------------------------------------------------------------- */
+
+.adepa-site .wp-block-button__link {
+	border-radius: var(--adepa-radius);
+	transition: background-color var(--motion-standard) var(--adepa-ease),
+		color var(--motion-standard) var(--adepa-ease),
+		border-color var(--motion-standard) var(--adepa-ease);
+}
+
+.adepa-site .wp-block-button__link:hover {
+	background-color: var(--adepa-pepper-dark);
+	border-color: var(--adepa-pepper-dark);
+	color: var(--adepa-white);
+}
+
+.adepa-site .adepa-btn--ghost .wp-block-button__link {
+	background-color: transparent;
+	border-color: var(--adepa-ink);
+	color: var(--adepa-ink);
+}
+
+.adepa-site .adepa-btn--ghost .wp-block-button__link:hover {
+	background-color: var(--adepa-ink);
+	border-color: var(--adepa-ink);
+	color: var(--adepa-cream);
+}
+
+.adepa-site .adepa-featured .adepa-btn--ghost .wp-block-button__link,
+.adepa-site .adepa-cta .adepa-btn--ghost .wp-block-button__link {
+	background-color: transparent;
+	border-color: rgba(245, 240, 230, 0.55);
+	color: var(--adepa-cream);
+}
+
+.adepa-site .adepa-featured .adepa-btn--ghost .wp-block-button__link:hover,
+.adepa-site .adepa-cta .adepa-btn--ghost .wp-block-button__link:hover {
+	background-color: var(--adepa-cream);
+	border-color: var(--adepa-cream);
+	color: var(--adepa-ink);
+}
+
+.adepa-actions {
+	gap: 0.75rem;
+	margin-block-start: 2rem;
+}
+
+.adepa-actions .wp-block-button {
+	margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   4. Header
+   ------------------------------------------------------------------------- */
+
+.adepa-header {
+	background-color: var(--adepa-cream);
+	border-bottom: 1px solid var(--adepa-line);
+	color: var(--adepa-ink);
+}
+
+.adepa-header__inner {
+	display: flex;
+	align-items: center;
+	gap: clamp(1rem, 2vw, 2.5rem);
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+	padding: 0.85rem var(--adepa-gutter);
+}
+
+.adepa-header__brand {
+	display: flex;
+	flex: 0 0 auto;
+	flex-direction: column;
+	gap: 0.2rem;
+}
+
+.adepa-wordmark {
+	margin: 0;
+	font-family: var(--adepa-font-display);
+	font-size: 1.4rem;
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.035em;
+	text-transform: uppercase;
+	color: var(--adepa-ink);
+}
+
+.adepa-wordmark a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.adepa-wordmark a:hover {
+	color: var(--adepa-pepper);
+}
+
+.adepa-header__tagline {
+	margin: 0;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--adepa-muted);
+}
+
+.adepa-skip {
+	position: fixed;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 1000;
+	padding: 0.65rem 1rem;
+	background: var(--adepa-ink);
+	color: var(--adepa-cream);
+	font-size: var(--adepa-small);
+	font-weight: 700;
+	text-decoration: none;
+	transform: translateY(-200%);
+}
+
+.adepa-skip:focus {
+	transform: translateY(0);
+	color: var(--adepa-cream);
+}
+
+/* Navigation ------------------------------------------------------------- */
+
+.adepa-nav {
+	flex: 1 1 auto;
+}
+
+.adepa-nav .wp-block-navigation__container {
+	gap: clamp(0.6rem, 1.4vw, 1.75rem);
+	align-items: center;
+}
+
+.adepa-nav .wp-block-navigation-item__content {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	padding: 0.35rem 0;
+	font-family: var(--adepa-font-body);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--adepa-ink);
+	border-bottom: 1px solid transparent;
+	transition: color var(--motion-fast) var(--adepa-ease),
+		border-color var(--motion-fast) var(--adepa-ease);
+}
+
+.adepa-nav .wp-block-navigation-item__content:hover,
+.adepa-nav .wp-block-navigation-item__content[aria-current="page"] {
+	color: var(--adepa-ink);
+	border-bottom-color: var(--adepa-pepper);
+}
+
+.adepa-nav .wp-block-navigation-item__content:focus-visible {
+	outline-offset: 4px;
+}
+
+.adepa-nav .wp-block-navigation__responsive-container-open,
+.adepa-nav .wp-block-navigation__responsive-container-close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+	padding: 0.35rem;
+	color: var(--adepa-ink);
+	background: transparent;
+	border: 0;
+}
+
+.adepa-nav .wp-block-navigation__responsive-container-open:hover,
+.adepa-nav .wp-block-navigation__responsive-container-close:hover {
+	color: var(--adepa-pepper);
+}
+
+.adepa-nav .wp-block-navigation__responsive-container-open svg,
+.adepa-nav .wp-block-navigation__responsive-container-close svg {
+	fill: currentColor;
+}
+
+.adepa-nav .wp-block-navigation__responsive-container.is-menu-open {
+	padding: 1.5rem var(--adepa-gutter);
+}
+
+.adepa-nav
+	.wp-block-navigation__responsive-container.is-menu-open
+	.wp-block-navigation__container {
+	gap: 1.25rem;
+	align-items: flex-start;
+}
+
+.adepa-nav
+	.wp-block-navigation__responsive-container.is-menu-open
+	.wp-block-navigation-item__content {
+	font-family: var(--adepa-font-display);
+	font-size: clamp(1.75rem, 7vw, 2.75rem);
+	font-weight: 700;
+	line-height: 1.05;
+	letter-spacing: -0.03em;
+	text-transform: none;
+	color: var(--adepa-cream);
+	border-bottom: 0;
+}
+
+.adepa-nav
+	.wp-block-navigation__responsive-container.is-menu-open
+	.wp-block-navigation-item__content[aria-current="page"] {
+	color: var(--adepa-spice);
+}
+
+.adepa-nav .wp-block-navigation__responsive-container-close svg {
+	fill: var(--adepa-cream);
+}
+
+.adepa-nav .wp-block-navigation__responsive-container-close {
+	color: var(--adepa-cream);
+}
+
+.adepa-nav__account {
+	display: none;
+}
+
+.adepa-header__actions {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 1.25rem;
+}
+
+.adepa-header__account {
+	margin: 0;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+}
+
+.adepa-header__account a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	color: var(--adepa-ink);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	padding-bottom: 2px;
+}
+
+.adepa-header__account a:hover {
+	border-bottom-color: var(--adepa-pepper);
+}
+
+.adepa-header__cta .wp-block-button {
+	margin: 0;
+}
+
+.adepa-site .adepa-btn--sm .wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.75rem;
+	padding: 0.62rem 1.1rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------------------
+   5. Hero
+   ------------------------------------------------------------------------- */
+
+.adepa-hero {
+	background-color: var(--adepa-cream);
+}
+
+.adepa-hero__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+	align-items: start;
+	gap: clamp(2rem, 5vw, 5rem);
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+	padding: clamp(2.5rem, 5vw, 4.5rem) var(--adepa-gutter)
+		clamp(3rem, 7vw, 6.5rem);
+}
+
+.adepa-hero__copy {
+	padding-top: clamp(0rem, 1.5vw, 1.5rem);
+}
+
+.adepa-hero__title {
+	margin: 0 0 1.75rem;
+	max-width: 14ch;
+	font-family: var(--adepa-font-display);
+	font-size: var(--adepa-display-xl);
+	font-weight: 750;
+	line-height: 0.92;
+	letter-spacing: -0.05em;
+	text-wrap: balance;
+	color: var(--adepa-ink);
+}
+
+.adepa-hero__title em {
+	display: block;
+	font-style: normal;
+	color: var(--adepa-pepper);
+}
+
+.adepa-hero__lead {
+	margin: 0 0 0.5rem;
+	max-width: 34ch;
+	font-size: var(--adepa-lead);
+	line-height: 1.55;
+	color: var(--adepa-ink);
+}
+
+.adepa-hero__note {
+	margin: 2.25rem 0 0;
+	padding-top: 1.25rem;
+	max-width: 42ch;
+	border-top: 1px solid var(--adepa-line);
+	font-size: var(--adepa-small);
+	line-height: 1.6;
+	color: var(--adepa-muted);
+}
+
+.adepa-hero__media {
+	position: relative;
+	margin-top: clamp(0rem, 3vw, 2.5rem);
+}
+
+.adepa-hero__media::before {
+	content: "";
+	position: absolute;
+	inset: 24px -14px -10px 24px;
+	background: var(--adepa-spice);
+	z-index: 0;
+}
+
+.adepa-hero__image {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	/* The supplied hero photograph is 1200 x 1166. Keeping its own ratio
+	   avoids cropping the plate at the sides. */
+	aspect-ratio: 1200 / 1166;
+	overflow: hidden;
+	background: var(--adepa-surface);
+}
+
+.adepa-hero__image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.adepa-stamp {
+	position: absolute;
+	left: -1.5rem;
+	bottom: 16%;
+	z-index: 2;
+	display: grid;
+	place-content: center;
+	width: 6.25rem;
+	height: 6.25rem;
+	border: 1px solid var(--adepa-ink);
+	border-radius: 50%;
+	background: var(--adepa-cream);
+	color: var(--adepa-ink);
+	font-family: var(--adepa-font-body);
+	font-size: 0.625rem;
+	font-weight: 700;
+	line-height: 1.4;
+	letter-spacing: 0.12em;
+	text-align: center;
+	text-transform: uppercase;
+	transform: rotate(-8deg);
+}
+
+.adepa-hero .adepa-caption {
+	position: relative;
+	z-index: 1;
+}
+
+/* Ticker */
+
+.adepa-ticker {
+	background: var(--adepa-ink);
+	color: var(--adepa-cream);
+	padding: 0 var(--adepa-gutter);
+}
+
+.adepa-ticker__row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+	padding: 1rem 0;
+	font-size: var(--adepa-micro);
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	line-height: 1.5;
+	text-transform: uppercase;
+	color: var(--adepa-cream);
+}
+
+.adepa-ticker__row span {
+	display: inline-flex;
+	align-items: center;
+}
+
+.adepa-ticker__row span + span::before {
+	content: "";
+	width: 4px;
+	height: 4px;
+	margin: 0 1.1rem;
+	background: var(--adepa-spice);
+	transform: rotate(45deg);
+}
+
+/* -------------------------------------------------------------------------
+   6. Featured dishes
+   ------------------------------------------------------------------------- */
+
+.adepa-featured {
+	background: var(--adepa-ink);
+	color: var(--adepa-cream);
+	padding: var(--adepa-section) var(--adepa-gutter);
+}
+
+.adepa-featured__inner {
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+}
+
+.adepa-featured__head {
+	display: grid;
+	grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+	column-gap: clamp(2rem, 5vw, 5rem);
+	align-items: end;
+}
+
+.adepa-featured__head > .adepa-eyebrow {
+	grid-column: 1 / -1;
+	margin-bottom: 1.5rem;
+}
+
+.adepa-featured__head > h2 {
+	grid-column: 1;
+	margin: 0;
+	color: var(--adepa-cream);
+}
+
+.adepa-featured__intro {
+	grid-column: 2;
+	margin: 0 0 0.5rem;
+	max-width: 42ch;
+	font-size: var(--adepa-lead);
+	line-height: 1.55;
+	color: rgba(245, 240, 230, 0.78);
+}
+
+.adepa-dishes {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	align-items: start;
+	gap: clamp(2rem, 4vw, 3.5rem);
+	margin-top: clamp(3rem, 6vw, 5.5rem);
+}
+
+.adepa-dish:nth-child(1) {
+	grid-column: 1 / 6;
+}
+
+.adepa-dish:nth-child(2) {
+	grid-column: 6 / 10;
+	margin-top: clamp(2rem, 6vw, 5.5rem);
+}
+
+.adepa-dish:nth-child(3) {
+	grid-column: 10 / 13;
+	margin-top: clamp(1rem, 3vw, 2.5rem);
+}
+
+.adepa-dish__media {
+	position: relative;
+	margin: 0 0 1.35rem;
+	overflow: hidden;
+	background: rgba(245, 240, 230, 0.06);
+}
+
+.adepa-dish:nth-child(1) .adepa-dish__media {
+	aspect-ratio: 4 / 5;
+}
+
+.adepa-dish:nth-child(2) .adepa-dish__media,
+.adepa-dish:nth-child(3) .adepa-dish__media {
+	aspect-ratio: 4 / 5;
+}
+
+.adepa-dish__media figure {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.adepa-dish__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform var(--motion-reveal) var(--adepa-ease);
+}
+
+.adepa-dish:hover .adepa-dish__media img {
+	transform: scale(1.03);
+}
+
+.adepa-dish__index {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 2;
+	margin: 0;
+	padding: 0.3rem 0.5rem;
+	border: 1px solid rgba(245, 240, 230, 0.32);
+	background: var(--adepa-ink);
+	color: var(--adepa-cream);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	line-height: 1;
+}
+
+.adepa-dish__kicker {
+	margin: 0 0 0.5rem;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--adepa-spice);
+}
+
+.adepa-dish__name {
+	margin: 0 0 0.5rem;
+	font-size: var(--adepa-h3);
+	line-height: 1.05;
+	letter-spacing: -0.025em;
+	color: var(--adepa-cream);
+}
+
+.adepa-dish__desc {
+	margin: 0 0 1.1rem;
+	max-width: 34ch;
+	font-size: var(--adepa-small);
+	line-height: 1.6;
+	color: rgba(245, 240, 230, 0.72);
+}
+
+.adepa-dish__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.5rem 0.85rem;
+	margin: 0;
+}
+
+.adepa-dish__price {
+	font-family: var(--adepa-font-display);
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: var(--adepa-spice);
+}
+
+.adepa-dish__state {
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: rgba(245, 240, 230, 0.66);
+}
+
+.adepa-dish__state::before {
+	content: "";
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	margin-right: 0.45rem;
+	background: var(--adepa-spice);
+	transform: rotate(45deg);
+}
+
+.adepa-featured__foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem 3rem;
+	margin-top: clamp(3rem, 6vw, 5rem);
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(245, 240, 230, 0.16);
+}
+
+.adepa-featured__foot .adepa-note {
+	max-width: 58ch;
+	color: rgba(245, 240, 230, 0.66);
+}
+
+.adepa-featured__foot .adepa-textlink {
+	color: var(--adepa-cream);
+}
+
+/* -------------------------------------------------------------------------
+   7. Menu discovery
+   ------------------------------------------------------------------------- */
+
+.adepa-menu {
+	position: relative;
+	overflow: hidden;
+	background: var(--adepa-cream);
+	padding: var(--adepa-section) var(--adepa-gutter);
+}
+
+.adepa-menu__word {
+	position: absolute;
+	right: -0.05em;
+	bottom: -0.2em;
+	z-index: 0;
+	font-family: var(--adepa-font-display);
+	font-size: clamp(9rem, 24vw, 22rem);
+	font-weight: 800;
+	line-height: 0.72;
+	letter-spacing: -0.06em;
+	color: transparent;
+	-webkit-text-stroke: 1px var(--adepa-line);
+	pointer-events: none;
+	user-select: none;
+}
+
+.adepa-menu__inner {
+	position: relative;
+	z-index: 1;
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+}
+
+.adepa-menu__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+	align-items: start;
+	gap: clamp(2.5rem, 6vw, 7rem);
+}
+
+.adepa-menu__head .adepa-display-lg {
+	margin: 0 0 1.75rem;
+}
+
+.adepa-menu__lead {
+	margin: 0 0 2rem;
+	max-width: 40ch;
+	font-size: var(--adepa-lead);
+	line-height: 1.55;
+}
+
+.adepa-menu__head .adepa-actions {
+	margin-block-start: 0;
+}
+
+.adepa-index {
+	border-bottom: 1px solid var(--adepa-line);
+}
+
+.adepa-index__row {
+	display: grid;
+	grid-template-columns: 2.75rem minmax(0, 1fr);
+	align-items: start;
+	gap: 1.5rem;
+	padding: 1.75rem 0;
+	border-top: 1px solid var(--adepa-line);
+}
+
+.adepa-index__num {
+	margin: 0;
+	padding-top: 0.15rem;
+	font-family: var(--adepa-font-display);
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--adepa-pepper);
+}
+
+.adepa-index__text h3 {
+	margin: 0 0 0.5rem;
+	font-size: var(--adepa-h4);
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+
+.adepa-index__text p {
+	margin: 0;
+	max-width: 42ch;
+	font-size: var(--adepa-small);
+	line-height: 1.6;
+	color: var(--adepa-muted);
+}
+
+/* -------------------------------------------------------------------------
+   8. Brand story
+   ------------------------------------------------------------------------- */
+
+.adepa-story {
+	background: var(--adepa-pepper);
+	color: var(--adepa-cream);
+	padding: var(--adepa-section) var(--adepa-gutter);
+}
+
+.adepa-story__inner {
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+}
+
+.adepa-story__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+	align-items: start;
+	gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.adepa-story__title {
+	margin: 0;
+	color: var(--adepa-cream);
+}
+
+.adepa-story__media {
+	margin-top: clamp(2rem, 4vw, 3.5rem);
+	max-width: 26rem;
+	aspect-ratio: 3 / 4;
+	overflow: hidden;
+	background: rgba(245, 240, 230, 0.12);
+}
+
+.adepa-story__media figure {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.adepa-story__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.adepa-story__body {
+	padding-top: clamp(0rem, 2vw, 1rem);
+}
+
+.adepa-story__body p {
+	margin: 0 0 1.25rem;
+	max-width: 46ch;
+	color: var(--adepa-cream);
+	line-height: 1.7;
+}
+
+.adepa-story__body p.adepa-story__lead {
+	margin-bottom: 1.5rem;
+	font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+	font-weight: 500;
+	line-height: 1.45;
+	letter-spacing: -0.015em;
+}
+
+.adepa-facts {
+	margin-top: clamp(2rem, 4vw, 3rem);
+	border-top: 1px solid rgba(245, 240, 230, 0.32);
+}
+
+.adepa-fact {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+	gap: 1.5rem;
+	padding: 1rem 0;
+	border-bottom: 1px solid rgba(245, 240, 230, 0.32);
+}
+
+.adepa-fact__label {
+	margin: 0;
+	font-size: var(--adepa-micro);
+	font-weight: 700;
+	line-height: 1.5;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--adepa-cream);
+}
+
+.adepa-fact__value {
+	margin: 0;
+	font-size: var(--adepa-small);
+	line-height: 1.55;
+	color: var(--adepa-cream);
+}
+
+/* -------------------------------------------------------------------------
+   9. Delivery
+   ------------------------------------------------------------------------- */
+
+.adepa-delivery {
+	background: var(--adepa-surface);
+	color: var(--adepa-ink);
+	padding: var(--adepa-section) var(--adepa-gutter);
+}
+
+.adepa-delivery__inner {
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+}
+
+.adepa-delivery__head {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	align-items: end;
+	gap: 1.5rem clamp(2rem, 6vw, 6rem);
+	margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.adepa-delivery__title h2 {
+	margin: 0;
+	color: var(--adepa-ink);
+}
+
+.adepa-delivery__lead {
+	margin: 0 0 0.5rem;
+	max-width: 44ch;
+	font-size: var(--adepa-lead);
+	line-height: 1.55;
+	color: var(--adepa-ink);
+}
+
+.adepa-areas {
+	border-top: 1px solid var(--adepa-ink);
+}
+
+.adepa-area {
+	display: grid;
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+	align-items: baseline;
+	gap: 0.5rem 1.5rem;
+	padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+	border-bottom: 1px solid var(--adepa-ink);
+}
+
+.adepa-area__name {
+	margin: 0;
+	font-family: var(--adepa-font-display);
+	font-size: clamp(2rem, 4.5vw, 3.75rem);
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: -0.04em;
+	color: var(--adepa-ink);
+}
+
+.adepa-area__meta {
+	margin: 0;
+	font-size: var(--adepa-micro);
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--adepa-muted);
+}
+
+.adepa-steps {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(1.5rem, 3vw, 3rem);
+	margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.adepa-step {
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--adepa-ink);
+}
+
+.adepa-step__num {
+	margin: 0 0 1rem;
+	font-size: var(--adepa-micro);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	color: var(--adepa-pepper);
+}
+
+.adepa-step h3 {
+	margin: 0 0 0.5rem;
+	font-size: var(--adepa-h4);
+	line-height: 1.2;
+}
+
+.adepa-step p {
+	margin: 0;
+	max-width: 34ch;
+	font-size: var(--adepa-small);
+	line-height: 1.6;
+	color: var(--adepa-muted);
+}
+
+.adepa-notice {
+	display: grid;
+	grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+	gap: 0.75rem 2rem;
+	margin-top: clamp(2.5rem, 5vw, 4rem);
+	padding: clamp(1.25rem, 3vw, 2rem);
+	border: 1px solid var(--adepa-ink);
+	background: var(--adepa-cream);
+}
+
+.adepa-notice__label {
+	grid-column: 1;
+	margin: 0;
+	font-size: var(--adepa-micro);
+	font-weight: 700;
+	line-height: 1.5;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--adepa-pepper);
+}
+
+.adepa-notice__text {
+	grid-column: 2;
+	margin: 0;
+	max-width: 60ch;
+	font-size: var(--adepa-small);
+	line-height: 1.65;
+	color: var(--adepa-ink);
+}
+
+.adepa-notice__link {
+	grid-column: 2;
+	margin-top: 0.35rem;
+}
+
+/* -------------------------------------------------------------------------
+   10. Order call to action
+   ------------------------------------------------------------------------- */
+
+.adepa-cta {
+	background: var(--adepa-ink);
+	color: var(--adepa-cream);
+	padding: var(--adepa-section) var(--adepa-gutter);
+}
+
+.adepa-cta__inner {
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+}
+
+.adepa-cta__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+	align-items: end;
+	gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.adepa-cta__title {
+	margin: 0;
+	color: var(--adepa-cream);
+}
+
+.adepa-cta__title em {
+	font-style: normal;
+	color: var(--adepa-spice);
+}
+
+.adepa-cta__side {
+	padding-bottom: 0.5rem;
+}
+
+.adepa-cta__note {
+	margin: 0 0 2rem;
+	max-width: 34ch;
+	font-size: var(--adepa-body);
+	line-height: 1.6;
+	color: rgba(245, 240, 230, 0.75);
+}
+
+.adepa-cta__side .adepa-actions {
+	margin-block-start: 0;
+}
+
+/* -------------------------------------------------------------------------
+   11. Footer
+   ------------------------------------------------------------------------- */
+
+.adepa-footer {
+	background: var(--adepa-ink);
+	color: var(--adepa-cream);
+	padding: clamp(3.5rem, 7vw, 5.5rem) var(--adepa-gutter) 1.75rem;
+	border-top: 1px solid rgba(245, 240, 230, 0.16);
+}
+
+.adepa-footer__inner {
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+}
+
+.adepa-footer__grid {
+	display: grid;
+	grid-template-columns: 1.4fr 0.7fr 0.7fr 1.1fr;
+	gap: clamp(2rem, 4vw, 4rem);
+	padding-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+.adepa-footer__wordmark {
+	margin: 0;
+	font-family: var(--adepa-font-display);
+	font-size: 1.5rem;
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.035em;
+	text-transform: uppercase;
+	color: var(--adepa-cream);
+}
+
+.adepa-footer__wordmark a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.adepa-footer__wordmark a:hover {
+	color: var(--adepa-spice);
+}
+
+.adepa-footer__blurb {
+	margin: 1rem 0 0;
+	max-width: 30ch;
+	font-size: var(--adepa-small);
+	line-height: 1.6;
+	color: rgba(245, 240, 230, 0.72);
+}
+
+.adepa-footer__meta {
+	margin: 1rem 0 0;
+	font-size: var(--adepa-micro);
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.05em;
+	color: var(--adepa-spice);
+}
+
+.adepa-footer__col .adepa-eyebrow {
+	margin-bottom: 1.25rem;
+}
+
+.adepa-footer__list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--adepa-small);
+	line-height: 1.5;
+}
+
+.adepa-footer__list li {
+	margin: 0;
+}
+
+.adepa-footer__list a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	color: var(--adepa-cream);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	padding-bottom: 1px;
+}
+
+.adepa-footer__list a:hover {
+	border-bottom-color: var(--adepa-spice);
+}
+
+.adepa-footer__col p {
+	margin: 0 0 1rem;
+	max-width: 32ch;
+	font-size: var(--adepa-small);
+	line-height: 1.6;
+	color: rgba(245, 240, 230, 0.72);
+}
+
+.adepa-footer__link {
+	margin: 0;
+	font-weight: 700;
+}
+
+.adepa-footer__link a {
+	color: var(--adepa-cream);
+	text-decoration: none;
+	border-bottom: 1px solid var(--adepa-spice);
+	padding-bottom: 2px;
+}
+
+.adepa-footer__link a:hover {
+	color: var(--adepa-spice);
+}
+
+.adepa-footer__base {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.75rem 2rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid rgba(245, 240, 230, 0.16);
+}
+
+.adepa-footer__legal {
+	margin: 0;
+	font-size: var(--adepa-micro);
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: rgba(245, 240, 230, 0.7);
+}
+
+.adepa-footer__notice {
+	margin: 0;
+	max-width: 60ch;
+	font-size: var(--adepa-micro);
+	line-height: 1.6;
+	color: rgba(245, 240, 230, 0.55);
+	text-align: right;
+}
+
+/* -------------------------------------------------------------------------
+   12. Interior pages
+   ------------------------------------------------------------------------- */
+
+.adepa-page-head {
+	background: var(--adepa-cream);
+	padding: clamp(3rem, 7vw, 5.5rem) var(--adepa-gutter)
+		clamp(2rem, 4vw, 3rem);
+	border-bottom: 1px solid var(--adepa-line);
+}
+
+.adepa-page-head__inner {
+	max-width: var(--adepa-max);
+	margin: 0 auto;
+}
+
+.adepa-page-head .adepa-eyebrow {
+	margin-bottom: 1.25rem;
+}
+
+.adepa-page-head__title {
+	margin: 0;
+	max-width: 22ch;
+	font-family: var(--adepa-font-display);
+	font-size: clamp(2.6rem, 6vw, 4.5rem);
+	font-weight: 700;
+	line-height: 0.95;
+	letter-spacing: -0.045em;
+	color: var(--adepa-ink);
+}
+
+.adepa-page-body {
+	padding: clamp(2.5rem, 5vw, 4rem) var(--adepa-gutter)
+		clamp(4rem, 8vw, 7rem);
+}
+
+.adepa-page-body p {
+	margin: 0 0 1.25rem;
+	line-height: 1.7;
+}
+
+.adepa-page-body .adepa-lead {
+	margin-bottom: 1.5rem;
+}
+
+.adepa-page-body h2 {
+	margin: 2.5rem 0 1rem;
+	font-size: var(--adepa-h2);
+	line-height: 1.05;
+}
+
+.adepa-page-body h3 {
+	margin: 2rem 0 0.75rem;
+	font-size: var(--adepa-h3);
+	line-height: 1.12;
+}
+
+.adepa-page-body ul,
+.adepa-page-body ol {
+	margin: 0 0 1.25rem;
+	padding-left: 1.25rem;
+}
+
+.adepa-page-body li {
+	margin-bottom: 0.5rem;
+}
+
+.adepa-page-body img {
+	max-width: 100%;
+	height: auto;
+}
+
+.adepa-page-body .adepa-empty-state {
+	margin: 2rem 0;
+	padding: clamp(1.25rem, 4vw, 2rem);
+	border: 1px solid var(--adepa-ink);
+	background: var(--adepa-surface);
+}
+
+.adepa-page-body .adepa-empty-state .adepa-eyebrow {
+	margin-bottom: 0.75rem;
+}
+
+.adepa-page-body .adepa-empty-state h2 {
+	margin-top: 0;
+}
+
+.adepa-page-body .adepa-empty-state p:last-child {
+	margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------
+   13. Motion
+   ------------------------------------------------------------------------- */
+
+.adepa-js .adepa-reveal {
+	opacity: 0;
+	transform: translateY(1.5rem);
+	transition: opacity var(--motion-reveal) var(--adepa-ease),
+		transform var(--motion-reveal) var(--adepa-ease);
+}
+
+.adepa-js .adepa-reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* -------------------------------------------------------------------------
+   14. Responsive
+   ------------------------------------------------------------------------- */
+
+@media (max-width: 1279px) {
+	.adepa-dish__name {
+		font-size: clamp(1.375rem, 2vw, 1.75rem);
+	}
+}
+
+@media (max-width: 1023px) {
+	.adepa-header__tagline {
+		display: none;
+	}
+
+	.adepa-header__account {
+		display: none;
+	}
+
+	.adepa-nav__account {
+		display: list-item;
+	}
+
+	.adepa-hero__grid {
+		grid-template-columns: minmax(0, 1fr);
+		gap: clamp(2.5rem, 5vw, 4rem);
+	}
+
+	.adepa-hero__copy {
+		padding-top: 0;
+	}
+
+	.adepa-hero__media {
+		max-width: 34rem;
+		margin-top: 0;
+	}
+
+	.adepa-stamp {
+		left: auto;
+		right: 1rem;
+	}
+
+	.adepa-featured__head {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.adepa-featured__head > h2 {
+		grid-column: 1;
+	}
+
+	.adepa-featured__intro {
+		grid-column: 1;
+		margin-top: 1.25rem;
+	}
+
+	.adepa-dishes {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.adepa-dish:nth-child(1) {
+		grid-column: 1;
+	}
+
+	.adepa-dish:nth-child(2) {
+		grid-column: 2;
+		margin-top: 3.5rem;
+	}
+
+	.adepa-dish:nth-child(3) {
+		grid-column: 1;
+		margin-top: 0;
+	}
+
+	.adepa-menu__grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.adepa-menu__lead {
+		max-width: 52ch;
+	}
+
+	.adepa-story__grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.adepa-story__media {
+		max-width: 22rem;
+	}
+
+	.adepa-delivery__head {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.adepa-cta__grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.adepa-cta__note {
+		max-width: 46ch;
+	}
+
+	.adepa-footer__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.adepa-footer__brand {
+		grid-column: 1 / -1;
+	}
+
+	.adepa-footer__col--wide {
+		grid-column: 1 / -1;
+	}
+}
+
+@media (max-width: 767px) {
+	.adepa-hero__title {
+		font-size: clamp(2.75rem, 12vw, 4rem);
+		max-width: none;
+	}
+
+	.adepa-site .wp-block-heading.adepa-display-lg {
+		font-size: clamp(2.4rem, 9vw, 3.25rem);
+	}
+
+	.adepa-featured__intro,
+	.adepa-menu__lead,
+	.adepa-delivery__lead {
+		max-width: none;
+	}
+
+	.adepa-dishes {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 2.5rem;
+	}
+
+	.adepa-dish:nth-child(1),
+	.adepa-dish:nth-child(2),
+	.adepa-dish:nth-child(3) {
+		grid-column: 1;
+		margin-top: 0;
+	}
+
+	.adepa-dish:nth-child(1) .adepa-dish__media,
+	.adepa-dish:nth-child(2) .adepa-dish__media,
+	.adepa-dish:nth-child(3) .adepa-dish__media {
+		aspect-ratio: 4 / 5;
+	}
+
+	.adepa-dish__desc {
+		max-width: none;
+	}
+
+	.adepa-featured__foot {
+		align-items: flex-start;
+	}
+
+	.adepa-area {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.adepa-steps {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1.5rem;
+	}
+
+	.adepa-step {
+		padding-top: 1.25rem;
+	}
+
+	.adepa-notice {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.5rem;
+	}
+
+	.adepa-notice__label,
+	.adepa-notice__text,
+	.adepa-notice__link {
+		grid-column: 1;
+	}
+
+	.adepa-notice__link {
+		margin-top: 0.5rem;
+	}
+
+	.adepa-fact {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.35rem;
+	}
+
+	.adepa-footer__base {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.adepa-footer__notice {
+		text-align: left;
+	}
+}
+
+@media (min-width: 601px) and (max-width: 767px) {
+	.adepa-header__inner {
+		flex-wrap: wrap;
+		row-gap: 0.4rem;
+	}
+
+	.adepa-nav {
+		order: 3;
+		flex: 1 0 100%;
+	}
+
+	.adepa-nav .wp-block-navigation__container {
+		justify-content: flex-start;
+	}
+}
+
+@media (max-width: 600px) {
+	.adepa-header__inner {
+		gap: 0.75rem;
+		padding-top: 0.9rem;
+		padding-bottom: 0.9rem;
+	}
+
+	.adepa-wordmark {
+		font-size: 1.1rem;
+	}
+
+	.adepa-nav .wp-block-navigation-item__content {
+		font-size: 0.6875rem;
+	}
+
+	.adepa-site .adepa-btn--sm .wp-block-button__link {
+		padding: 0.55rem 0.8rem;
+		font-size: 0.6875rem;
+		letter-spacing: 0.05em;
+	}
+
+	.adepa-hero__grid {
+		padding-top: 2rem;
+	}
+
+	.adepa-hero__title {
+		font-size: clamp(2.6rem, 11.4vw, 3.4rem);
+		margin-bottom: 1.5rem;
+	}
+
+	.adepa-hero__media::before {
+		inset: 14px -8px -8px 14px;
+	}
+
+	.adepa-stamp {
+		right: 0.75rem;
+		bottom: 1rem;
+		width: 5.25rem;
+		height: 5.25rem;
+		font-size: 0.5625rem;
+	}
+
+	.adepa-hero__note {
+		margin-top: 1.75rem;
+	}
+
+	.adepa-ticker__row {
+		font-size: 0.625rem;
+		letter-spacing: 0.1em;
+		padding: 0.85rem 0;
+	}
+
+	.adepa-ticker__row span + span::before {
+		margin: 0 0.7rem;
+	}
+
+	.adepa-menu__word {
+		font-size: 8rem;
+	}
+
+	.adepa-actions .wp-block-button {
+		flex: 1 1 auto;
+	}
+
+	.adepa-actions .wp-block-button__link {
+		width: 100%;
+		text-align: center;
+	}
+
+	.adepa-header__cta .wp-block-button {
+		flex: 0 0 auto;
+	}
+
+	.adepa-header__cta .wp-block-button__link {
+		width: auto;
+	}
+
+	.adepa-footer__grid {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 2.25rem;
+	}
+
+	.adepa-footer__brand,
+	.adepa-footer__col--wide {
+		grid-column: 1;
+	}
+
+	.adepa-page-head__title {
+		font-size: clamp(2.2rem, 9.5vw, 3rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.adepa-site *,
+	.adepa-site *::before,
+	.adepa-site *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.adepa-js .adepa-reveal {
+		opacity: 1;
+		transform: none;
+	}
+}

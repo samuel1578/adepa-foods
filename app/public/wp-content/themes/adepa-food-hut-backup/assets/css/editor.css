@@ -1,0 +1,56 @@
+/*
+ * ADEPA Food Hut — editor adjustments.
+ *
+ * main.css is loaded in the editor as well, so patterns keep their type,
+ * colour and component styling. This file only corrects editor-canvas
+ * behaviour that does not exist on the front end.
+ *
+ * @package ADEPA_Food_Hut
+ */
+
+.editor-styles-wrapper {
+	--wp--style--block-gap: 0px;
+	background-color: var(--adepa-cream, #F5F0E6);
+	color: var(--adepa-ink, #202019);
+	font-family: var(--adepa-font-body, "Manrope", Arial, sans-serif);
+}
+
+/* Full-bleed sections sit inside the editor canvas, so padding stands in
+   for the front-end viewport gutters. */
+.editor-styles-wrapper .adepa-hero__grid,
+.editor-styles-wrapper .adepa-featured,
+.editor-styles-wrapper .adepa-menu,
+.editor-styles-wrapper .adepa-story,
+.editor-styles-wrapper .adepa-delivery,
+.editor-styles-wrapper .adepa-cta,
+.editor-styles-wrapper .adepa-footer {
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
+}
+
+.editor-styles-wrapper .adepa-hero__grid {
+	padding-top: 2.5rem;
+	padding-bottom: 3rem;
+}
+
+/* Imagery should remain inspectable, at the right proportion. */
+.editor-styles-wrapper .adepa-hero__image,
+.editor-styles-wrapper .adepa-dish__media,
+.editor-styles-wrapper .adepa-story__media {
+	max-width: 100%;
+}
+
+/* The decorative menu word is noise inside the editing canvas. */
+.editor-styles-wrapper .adepa-menu__word {
+	display: none;
+}
+
+/* Core navigation is a live control in the editor; keep its links legible. */
+.editor-styles-wrapper .adepa-nav .wp-block-navigation-item__content {
+	color: var(--adepa-ink, #202019);
+}
+
+.editor-styles-wrapper .adepa-featured .adepa-nav .wp-block-navigation-item__content,
+.editor-styles-wrapper .adepa-cta .adepa-nav .wp-block-navigation-item__content {
+	color: var(--adepa-cream, #F5F0E6);
+}
